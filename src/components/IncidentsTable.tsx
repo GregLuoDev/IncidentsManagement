@@ -1,11 +1,7 @@
 
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import type { Incident, Priority } from "../shared/type";
-import { Box } from "@mui/material";
-import { formatLocalDateTime, formatLocalName } from "../shared/helper";
-
-const priorityName: Record<Priority, string> = { 1: 'High', 2: "Medium", 3: "Low" };
-const priorityIcon: Record<Priority, string> = { 1: '/img/alarm-high.svg', 2: "/img/alarm-medium.svg", 3: "/img/alarm-low.svg" };
+import { formatLocalDateTime, formatLocalName, priorityIcon, priorityName } from "../shared/helper";
 
 type Props = {
     incidents: Incident[]
@@ -17,11 +13,10 @@ export function IncidentsTable({ incidents }: Props) {
     const columns: GridColDef[] = [
         {
             field: "priority", headerName: "", type: "number", width: 80,
-            renderCell: (params) => (
-                <Box fontSize={20}>
-                    <img src={priorityIcon[params.value as Priority]} alt="Low" style={{ width: 15, height: 15 }} />
-                </Box>
-            )
+            renderCell: (params) => {
+                const priority=params.value as Priority
+                return <img src={priorityIcon[priority]} alt={priorityName[priority]} style={{ width: 15, height: 15 }} />
+            }
         },
         {
             field: "datetime", headerName: "Date and Time", width: 200,
@@ -29,13 +24,14 @@ export function IncidentsTable({ incidents }: Props) {
                 formatLocalDateTime(params.value),
         },
         { field: "id", headerName: "ID", width: 40 },
-        { field: 'locationId', headerName: 'Location Name', width: 200,
-             renderCell: (params) =>
+        {
+            field: 'locationId', headerName: 'Location Name', width: 200,
+            renderCell: (params) =>
                 formatLocalName(params.value),
-         },
+        },
         { field: "name", headerName: "Incident Name", width: 200 },
         {
-            field: 'priority2', // different field name
+            field: 'priority2',
             headerName: 'Priority',
             width: 120,
             valueGetter: (value, row) => {

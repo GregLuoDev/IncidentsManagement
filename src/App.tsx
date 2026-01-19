@@ -40,7 +40,7 @@ function App() {
 
 
   return (
-    <Box p={2}>
+    <Box p={2} sx={{width:'100%'}}>
       <Typography variant="h5" gutterBottom>
         Incidents
       </Typography>
@@ -57,11 +57,11 @@ function App() {
         ))}
       </Select>
 
-      {isMobile ? (
-        <IncidentsList incidents={incidents} />
-      ) : (
-        <IncidentsTable incidents={incidents} />
-      )}
+        {isMobile ? (
+          <IncidentsList incidents={incidents} />
+        ) : (
+          <IncidentsTable incidents={incidents} />
+        )}
     </Box>
   );
 }
