@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import type { LocationId } from "../shared/type";
+import type { LocationId } from "../../shared/type";
 
 type Props = {
     locations: LocationId[],

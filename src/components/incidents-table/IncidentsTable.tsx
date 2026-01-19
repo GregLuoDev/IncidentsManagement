@@ -1,7 +1,6 @@
-
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
-import type { Incident, Priority } from "../shared/type";
-import { formatLocalDateTime, formatLocalName, priorityIcon, priorityName } from "../shared/helper";
+import { formatLocalDateTime, formatLocalName, priorityIcon, priorityName } from "../../shared/helper";
+import type { Incident, Priority } from "../../shared/type";
 
 type Props = {
     incidents: Incident[]
@@ -14,7 +13,7 @@ export function IncidentsTable({ incidents }: Props) {
         {
             field: "priority", headerName: "", type: "number", width: 40,
             renderCell: (params) => {
-                const priority=params.value as Priority
+                const priority = params.value as Priority
                 return <img src={priorityIcon[priority]} alt={priorityName[priority]} style={{ width: 15, height: 15 }} />
             }
         },
@@ -25,7 +24,7 @@ export function IncidentsTable({ incidents }: Props) {
         },
         { field: "id", headerName: "ID", width: 40 },
         {
-            field: 'locationId', headerName: 'Location Name', width: 200,
+            field: 'locationId', headerName: 'Location Name', width: 160,
             renderCell: (params) =>
                 formatLocalName(params.value),
         },
@@ -33,23 +32,28 @@ export function IncidentsTable({ incidents }: Props) {
         {
             field: 'priority2',
             headerName: 'Priority',
-            width: 120,
+            width: 100,
             valueGetter: (value, row) => {
                 return row?.priority
             },
             renderCell: (params) => priorityName[params.value as Priority]
 
         },
-
+        {
+            field: "description", headerName: "Description", width: 350, valueGetter: () => {
+                return "This is description of this incident. This issue is not new."
+            },
+        },
     ];
 
     return <div style={{ height: 400, width: "100%" }}>
-        <DataGrid 
+        <DataGrid
             rows={incidents.map((i: Incident) => ({ ...i, id: i.id }))}
             columns={columns}
             initialState={{ pagination: { paginationModel } }}
             pageSizeOptions={[50, 100]}
             density="compact"
+
         />
     </div>
 }

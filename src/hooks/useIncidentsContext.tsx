@@ -6,7 +6,8 @@ import {
   type ReactNode,
 } from 'react';
 import { type Incident, type LocationId } from '../shared/type';
-// @ts-expect-error: fake API
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import fakeApi from '../API/fake-api';
 
 const initialContext = {

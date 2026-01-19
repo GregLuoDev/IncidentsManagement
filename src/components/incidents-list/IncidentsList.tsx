@@ -1,6 +1,6 @@
-import { formatLocalDateTime, formatLocalName, priorityIcon, priorityName } from "../shared/helper";
-import type { Incident } from "../shared/type";
 import { Grid, List, ListItem } from "@mui/material";
+import { formatLocalDateTime, formatLocalName, priorityIcon, priorityName } from "../../shared/helper";
+import type { Incident } from "../../shared/type";
 
 type Props = {
     incidents: Incident[]
@@ -19,6 +19,7 @@ export function IncidentsList({ incidents }: Props) {
                         <div>{formatLocalDateTime(item.datetime)}</div>
                         <div>{formatLocalName(item.locationId)}</div>
                         <div>{item.name}</div>
+                        <div>This is description of this incident. This issue is not new.</div>
                     </Grid>
                 </Grid>
             </ListItem>
