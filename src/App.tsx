@@ -6,6 +6,14 @@ import { type Incident, type LocationId } from './shared/type.js';
 import fakeApi from './API/fake-api.js';
 import { IncidentsTable } from './components/IncidentsTable.js';
 import { IncidentsList } from './components/IncidentsList.js';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 function App() {
   const [locations, setLocations] = useState<LocationId[]>([]);
@@ -40,29 +48,33 @@ function App() {
 
 
   return (
-    <Box p={2} sx={{width:'100%'}}>
-      <Typography variant="h5" gutterBottom>
-        Incidents
-      </Typography>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
 
-      <Select
-        value={selectedLocation}
-        onChange={(e) => setSelectedLocation(e.target.value)}
-        sx={{ mb: 2, minWidth: 200 }}
-      >
-        {locations.map((loc: LocationId) => (
-          <MenuItem key={loc.id} value={loc.id}>
-            {loc.name}
-          </MenuItem>
-        ))}
-      </Select>
+      <Box p={2} sx={{ width: '100%' }}>
+        <Typography variant="h5" gutterBottom>
+          Incidents
+        </Typography>
+
+        <Select
+          value={selectedLocation}
+          onChange={(e) => setSelectedLocation(e.target.value)}
+          sx={{ mb: 2, minWidth: 200 }}
+        >
+          {locations.map((loc: LocationId) => (
+            <MenuItem key={loc.id} value={loc.id}>
+              {loc.name}
+            </MenuItem>
+          ))}
+        </Select>
 
         {isMobile ? (
           <IncidentsList incidents={incidents} />
         ) : (
           <IncidentsTable incidents={incidents} />
         )}
-    </Box>
+      </Box>
+    </ThemeProvider>
   );
 }
 
