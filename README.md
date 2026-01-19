@@ -28,6 +28,6 @@ Github repo: https://github.com/GregLuoDev/IncidentsManagement
 
 ## UI
 
-![Incidents Table](screenshots/incidentsTable.png.png)
+![Incidents Table](screenshots/incidentsTable.png)
 
 ![Incidents List](screenshots/incidentsList.png)
