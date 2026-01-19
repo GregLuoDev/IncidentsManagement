@@ -12,7 +12,7 @@ export function IncidentsTable({ incidents }: Props) {
 
     const columns: GridColDef[] = [
         {
-            field: "priority", headerName: "", type: "number", width: 80,
+            field: "priority", headerName: "", type: "number", width: 40,
             renderCell: (params) => {
                 const priority=params.value as Priority
                 return <img src={priorityIcon[priority]} alt={priorityName[priority]} style={{ width: 15, height: 15 }} />
@@ -44,11 +44,12 @@ export function IncidentsTable({ incidents }: Props) {
     ];
 
     return <div style={{ height: 400, width: "100%" }}>
-        <DataGrid
+        <DataGrid 
             rows={incidents.map((i: Incident) => ({ ...i, id: i.id }))}
             columns={columns}
             initialState={{ pagination: { paginationModel } }}
             pageSizeOptions={[50, 100]}
+            density="compact"
         />
     </div>
 }

@@ -1,6 +1,6 @@
 import './App.css';
 import { useEffect, useState, } from 'react';
-import { Box, MenuItem, Select, Typography, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { type Incident, type LocationId } from './shared/type.js';
 // @ts-expect-error: import all APIs as an object
 import fakeApi from './API/fake-api.js';
@@ -8,6 +8,7 @@ import { IncidentsTable } from './components/IncidentsTable.js';
 import { IncidentsList } from './components/IncidentsList.js';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { LocationSelect } from './components/LocationSelect.js';
 
 const darkTheme = createTheme({
   palette: {
@@ -56,17 +57,7 @@ function App() {
           Incidents
         </Typography>
 
-        <Select
-          value={selectedLocation}
-          onChange={(e) => setSelectedLocation(e.target.value)}
-          sx={{ mb: 2, minWidth: 200 }}
-        >
-          {locations.map((loc: LocationId) => (
-            <MenuItem key={loc.id} value={loc.id}>
-              {loc.name}
-            </MenuItem>
-          ))}
-        </Select>
+        <LocationSelect locations={locations} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} />
 
         {isMobile ? (
           <IncidentsList incidents={incidents} />

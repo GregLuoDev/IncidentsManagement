@@ -8,7 +8,7 @@ type Props = {
 
 export function IncidentsList({ incidents }: Props) {
 
-    return <List>
+    return <List >
         {incidents.map((item: Incident) => (
             <ListItem key={item.id} divider>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1 }} sx={{width:'100%'}}>
